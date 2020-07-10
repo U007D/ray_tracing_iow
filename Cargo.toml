@@ -1,0 +1,42 @@
+[package]
+authors = ["u007d <b2b@humanenginuity.com>"]
+categories = []
+edition = "2018"
+keywords = []
+license = "MIT OR Apache-2.0"
+name = "ray_tracing_iow"
+readme = "README.md"
+repository = "https://github.com/u007d/ray_tracing_iow"
+version = "0.1.0"
+
+[lib]
+name = "lib"
+path = "src/lib.rs"
+
+[dependencies]
+structopt = "*"
+thiserror = "*"
+
+[profile.dev]
+debug = true
+debug-assertions = true
+lto = false
+opt-level = 0
+panic = "unwind"
+rpath = false
+
+[profile.release]
+codegen-units = 1
+debug = false
+debug-assertions = false
+lto = "fat"
+opt-level = 3
+panic = "unwind"
+rpath = false
+
+[profile.test]
+debug = true
+debug-assertions = true
+lto = false
+opt-level = 0
+rpath = false
