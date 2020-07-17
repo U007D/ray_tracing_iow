@@ -24,7 +24,7 @@
 //#![warn(clippy::cargo, clippy::restriction, missing_docs, clippy::missing_errors_doc, warnings)]
 //#![deny(warnings)]
 
-use {lib::{self, Args, error::Result}};
+use lib::{self, error::Result, Args};
 use structopt::StructOpt;
 
 fn main() -> Result<()> {

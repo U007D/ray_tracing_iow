@@ -14,8 +14,10 @@ name = "lib"
 path = "src/lib.rs"
 
 [dependencies]
-structopt = "*"
-thiserror = "*"
+thiserror = "1"
+assert2 = "0.2"
+float-cmp = "0.8"
+interpol = "0.1"
 
 [profile.dev]
 debug = true
