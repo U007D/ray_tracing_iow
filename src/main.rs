@@ -4,8 +4,7 @@
     clippy::float_cmp_const,
     clippy::indexing_slicing,
     clippy::integer_arithmetic,
-    clippy::option_unwrap_used,
-    clippy::result_unwrap_used,
+    clippy::unwrap_used,
     clippy::pedantic
 )]
 #![warn(clippy::all, clippy::nursery, clippy::pedantic, rust_2018_idioms)]

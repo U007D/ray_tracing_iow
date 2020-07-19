@@ -112,3 +112,5 @@ Cargo.lock
 .history
 
 # End of https://www.gitignore.io/api/rust,clion,intellij,visualstudiocode
+
+image.ppm
