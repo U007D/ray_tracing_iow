@@ -1,7 +1,6 @@
 use super::{assert, *};
 
 use crate::error::image::Error;
-use std::convert::TryInto;
 
 #[test]
 fn new__with_positive_dimensions_succeeds() {
@@ -18,7 +17,7 @@ fn new__with_positive_dimensions_succeeds() {
         res == Ok(Image {
             height: NonZeroU32::new(height).unwrap(),
             width: NonZeroU32::new(width).unwrap(),
-            buffer: Vec::with_capacity((width * height).try_into().unwrap()),
+            buffer: vec![Color::default(); usize::try_from(width * height).unwrap()],
             pixel_count: usize::try_from(width * height).unwrap(),
         })
     )

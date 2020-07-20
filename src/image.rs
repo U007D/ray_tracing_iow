@@ -71,7 +71,7 @@ impl Image {
             (0..self.width()).for_each(|x| {
                 let pixel = self.buffer
                     [usize::try_from(self.width() * y + x).expect(msg::ERR_16_BIT_PROCESSOR)];
-                builder += &format!("\n{pixel.0} {pixel.1} {pixel.2}");
+                builder += &format!("\n{pixel}");
             })
         });
         builder

@@ -1,4 +1,5 @@
 // Safety-critical application lints
+#![warn(clippy::all, clippy::nursery, clippy::pedantic, rust_2018_idioms)]
 #![deny(
     bare_trait_objects,
     clippy::float_cmp_const,
@@ -7,7 +8,6 @@
     clippy::unwrap_used,
     clippy::pedantic
 )]
-#![warn(clippy::all, clippy::nursery, clippy::pedantic, rust_2018_idioms)]
 #![allow(
     clippy::empty_enum,
     clippy::pub_enum_variant_names,
@@ -29,11 +29,13 @@ mod color;
 pub mod consts;
 pub mod error;
 mod image;
+mod point_3;
+mod vec3;
 
 use error::Result;
-use float_cmp::Ulps;
+use interpol::eprint;
 use std::cmp::max;
-pub use {args::Args, color::Color, image::Image};
+pub use {args::Args, color::Color, image::Image, point_3::Point3};
 
 #[allow(clippy::needless_pass_by_value)]
 pub fn main(_args: Args) -> Result<()> {
@@ -50,18 +52,14 @@ fn max_non_zero_index_from_dimension(dimension: u32) -> f64 {
 fn render_image(mut img: Image) -> Image {
     let w_denom = max_non_zero_index_from_dimension(img.width());
     let h_denom = max_non_zero_index_from_dimension(img.height());
+    eprint!("Scanlines remaining: ");
     (0..img.height()).for_each(|y| {
+        eprint!("{img.height().saturating_sub(y)} ");
         (0..img.width()).for_each(|x| {
-            let r = f64::from(x) / w_denom;
-            let g = f64::from(y) / h_denom;
-            let b = 0.25_f64;
-
-            let r_trunc = (256.0.prev() * r).trunc();
-            let g_trunc = (256.0.prev() * g).trunc();
-            let b_trunc = (256.0.prev() * b).trunc();
-
-            img.set_pixel(x, y, Color(r_trunc, g_trunc, b_trunc));
+            let color = Color::new(f64::from(x) / w_denom, f64::from(y) / h_denom, 0.25);
+            img.set_pixel(x, y, color);
         })
     });
+    eprint!("0");
     img
 }
